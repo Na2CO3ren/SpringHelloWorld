@@ -1,0 +1,134 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/util
+   http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <bean id = "helloWorld2" class="com.robin.spring.beans.HelloWorld">
+        <property name="name2" value="RobinSpring2"></property>
+    </bean>
+
+    <bean id = "helloWorld" class="com.robin.spring.beans.HelloWorld">
+        <property name="name2" value="RobinSpring"></property>
+    </bean>
+
+    <bean id = "car" class="com.robin.spring.beans.Car">
+        <property name="brand" value="AODI"></property>
+        <property name="price" value="320"></property>
+        <property name="name" value="A6"></property>
+    </bean>
+
+    <bean id = "car2" class="com.robin.spring.beans.Car">
+        <constructor-arg name="price" value="120" ></constructor-arg>
+        <constructor-arg  name="brand" value="AODI" ></constructor-arg>
+        <constructor-arg name="name" value="A6" ></constructor-arg>
+    </bean>
+
+    <bean id = "car3" class="com.robin.spring.beans.Car">
+        <constructor-arg value="120" type="double"></constructor-arg>
+        <constructor-arg value="AODI" type="String"></constructor-arg>
+        <constructor-arg value="A6" type="String"></constructor-arg>
+    </bean>
+
+    <bean id="car4" class="com.robin.spring.beans.Car">
+        <constructor-arg name="brand">
+            <value>AODI</value>
+        </constructor-arg>
+        <constructor-arg name="price">
+            <value>120</value>
+        </constructor-arg>
+        <constructor-arg name="name">
+            <value>A6</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="car5" class="com.robin.spring.beans.Car">
+        <property name="brand">
+            <value><![CDATA[<AODI>]]></value>
+        </property>
+    </bean>
+
+    <bean id="robin" class="com.robin.spring.beans.Person">
+        <property name="name" value="Robin"></property>
+        <property name="age" value="26"></property>
+        <property name="car" ref="car3"></property>
+    </bean>
+
+    <bean id="robin3" class="com.robin.spring.beans.Person">
+        <property name="name" value="robin"></property>
+        <property name="age" value="26"></property>
+        <property name="car">
+            <bean id="myCar" class="com.robin.spring.beans.Car">
+                <property name="brand" value="BMW"></property>
+                <property name="price" value="1300000"></property>
+                <property name="maxSpeed" value="250"></property>
+            </bean>
+        </property>
+        <property name="car.brand" value="RBMW"></property>
+    </bean>
+
+    <bean id="robin2" class="com.robin.spring.beans.Person">
+        <property name="name" value="Robin"></property>
+        <property name="age" value="26"></property>
+        <property name="car">
+            <ref bean="car6"></ref>
+        </property>
+        <property name="car.price" value="12"></property>
+    </bean>
+
+    <bean id="car6" class="com.robin.spring.beans.Car">
+        <property name="brand">
+            <value>BMW</value>
+        </property>
+    </bean>
+
+    <bean id="robin21" class="com.robin.spring.collection.Person">
+        <property name="name" value="robin"></property>
+        <property name="age" value="26"></property>
+        <property name="cars">
+            <list>
+                <ref bean="car"></ref>
+                <ref bean="car2"></ref>
+                <ref bean="car4"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="robin22" class="com.robin.spring.collection.MapPerson">
+        <property name="name" value="robin"></property>
+        <property name="age" value="26"></property>
+        <property name="cars">
+            <map>
+                <entry key="AODI" value-ref="car3"></entry>
+                <entry key="BMW" value-ref="car6"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="robin23" class="com.robin.spring.collection.MapPerson">
+        <property name="name" value="robin"></property>
+        <property name="age" value="26"></property>
+        <property name="cars" ref="carMap"></property>
+    </bean>
+
+    <bean id="robin24" class="com.robin.spring.collection.Person">
+        <property name="name" value="robin"></property>
+        <property name="age" value="26"></property>
+        <property name="cars" ref="carList"></property>
+    </bean>
+
+    <util:list id="carList">
+        <ref bean="car"></ref>
+        <ref bean="car4"></ref>
+    </util:list>
+
+    <util:map id="carMap">
+        <entry key="AODI" value-ref="car"></entry>
+        <entry key="BMW" value-ref="car6"></entry>
+    </util:map>
+
+</beans>
